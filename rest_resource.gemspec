@@ -15,5 +15,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = RestResource::VERSION
 
+  gem.add_dependency('activesupport')
+
   gem.add_development_dependency('minitest', '>= 3.0.0')
 end
