@@ -1,4 +1,4 @@
-require 'minitest/autorun'
+require File.expand_path('../../support/test_helper', __FILE__)
 
 describe RestResource::Attributes do
 
