@@ -3,6 +3,9 @@ require File.expand_path('../../support/test_helper', __FILE__)
 describe RestResource::Attributes do
 
   before do
+    DummyClass.send(:include, RestResource::Attributes)
+    DummyClass.attributes(:id, :name)
+
     @object = DummyClass.new
   end
 
