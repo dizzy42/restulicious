@@ -42,7 +42,13 @@ describe RestResource::QueryMethods do
   end
 
 
-  it "has api_options method, which sends to coordinator"
+  it "has api_options method, which sends to coordinator" do
+    options = {
+      url:    "www.awesome.com/stuff"
+    }
+    RestResource::Coordinator.any_instance.expects(:api_options).with(options)
+    DummyClass.send(:api_options, options)
+  end
 
 end
 

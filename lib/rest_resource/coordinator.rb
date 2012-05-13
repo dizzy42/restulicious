@@ -22,5 +22,7 @@ module RestResource
     def all
     end
 
+    def api_options(options)
+    end
   end
 end

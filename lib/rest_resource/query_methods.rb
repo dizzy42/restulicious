@@ -34,6 +34,10 @@ module RestResource
 
       private
 
+      def api_options(options)
+        coordinator.api_options(options)
+      end
+
       def coordinator
         @coordinator ||= RestResource::Coordinator.new
       end
