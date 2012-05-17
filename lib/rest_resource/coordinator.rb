@@ -1,28 +1,21 @@
 module RestResource
   class Coordinator
 
-    def where(params)
-    end
+    delegate :where,
+      :from,
+      :limit,
+      :offset,
+      :select,
+      :first,
+      :all,
+      to: :query_interface
 
-    def from(url)
-    end
-
-    def limit(limit)
-    end
-
-    def offset(offset)
-    end
-
-    def select(fields)
-    end
-
-    def first
-    end
-
-    def all
+    def query_interface
+      RestResource::QueryInterface.new
     end
 
     def api_options(options)
     end
+
   end
 end
