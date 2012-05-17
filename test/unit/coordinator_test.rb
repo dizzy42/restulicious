@@ -36,7 +36,7 @@ describe RestResource::QueryInterface do
     @coordinator.first
   end
 
-  it "has all method, which sends to coordinator" do
+  it "has all method, which sends to interface" do
     RestResource::QueryInterface.any_instance.expects(:all)
     @coordinator.all
   end
