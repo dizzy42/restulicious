@@ -1,6 +1,6 @@
 require File.expand_path('../../support/test_helper', __FILE__)
 
-describe RestResource::QueryInterface do
+describe RestResource::Coordinator do
   describe "Interface" do
 
     before do
