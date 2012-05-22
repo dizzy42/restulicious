@@ -11,7 +11,7 @@ module RestResource
       to: :query_interface
 
     def query_interface
-      RestResource::QueryInterface.new
+      @query_interface ||= RestResource::QueryInterface.new
     end
 
     def api_options(options)
