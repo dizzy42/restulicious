@@ -1,7 +1,8 @@
 module RestResource
   class QueryInterface
 
-    def initialize
+    def initialize(url)
+      @url = url
       @params = {}
     end
 
@@ -25,10 +26,11 @@ module RestResource
       @params[:fields] = fields
     end
 
-    def first
-    end
+    private
 
-    def all
+    def all_url
+      # interpolated_url
+      @url
     end
 
   end

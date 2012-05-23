@@ -4,7 +4,7 @@ describe RestResource::QueryInterface do
   describe "Interface" do
 
     before do
-      @interface = RestResource::QueryInterface.new
+      @interface = RestResource::QueryInterface.new("http://bigdeal.com/the/next/:thing")
     end
 
     it "stores url in @url for from" do
@@ -40,13 +40,8 @@ describe RestResource::QueryInterface do
       assert_equal fields, @interface.instance_variable_get(:@params)[:fields]
     end
 
-    it "first method"
-
-    it "all method"
-
     describe "all_url" do
       it "does string interpolation"
-      it "uses @url if set"
       it "uses full url"
     end
 

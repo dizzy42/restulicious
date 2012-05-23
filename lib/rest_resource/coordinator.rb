@@ -5,13 +5,17 @@ module RestResource
       :from,
       :limit,
       :offset,
-      :select,
-      :first,
-      :all,
+      :select
       to: :query_interface
 
     def query_interface
-      @query_interface ||= RestResource::QueryInterface.new
+      @query_interface ||= RestResource::QueryInterface.new("")
+    end
+
+    def first
+    end
+
+    def all
     end
 
     def api_options(options)

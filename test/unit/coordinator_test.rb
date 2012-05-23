@@ -32,16 +32,6 @@ describe RestResource::Coordinator do
       @coordinator.select("id,name")
     end
 
-    it "has first method, which sends to interface" do
-      RestResource::QueryInterface.any_instance.expects(:first)
-      @coordinator.first
-    end
-
-    it "has all method, which sends to interface" do
-      RestResource::QueryInterface.any_instance.expects(:all)
-      @coordinator.all
-    end
-
     it "uses the same query interface each time" do
       assert_equal @coordinator.query_interface, @coordinator.query_interface
     end
