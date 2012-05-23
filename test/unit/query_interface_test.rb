@@ -41,15 +41,31 @@ describe RestResource::QueryInterface do
     end
 
     describe "all_url" do
-      it "does string interpolation"
-      it "uses full url"
+      it "does string interpolation" do
+        @interface.where(thing: "super")
+        assert_equal "http://bigdeal.com/the/next/super", @interface.all_url
+      end
+
+      it "uses full url" do
+        assert_equal "http://bigdeal.com/the/next/:thing", @interface.all_url
+      end
     end
 
     describe "first_url" do
-      it "does string interpolation"
-      it "uses @url if set"
-      it "adds id if present"
-      it "does not add trailing slash"
+      it "does string interpolation" do
+        @interface.where(thing: "super")
+        assert_equal "http://bigdeal.com/the/next/super", @interface.first_url
+      end
+
+      it "adds id" do
+        @interface.where(id: 123, thing: "super")
+        assert_equal "http://bigdeal.com/the/next/super/123", @interface.first_url
+      end
+
+      it "does not add trailing slash, without id" do
+        @interface.where(thing: "super")
+        assert_equal "http://bigdeal.com/the/next/super", @interface.first_url
+      end
     end
   end
 end

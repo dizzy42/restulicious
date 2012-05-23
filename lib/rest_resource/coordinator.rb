@@ -5,7 +5,7 @@ module RestResource
       :from,
       :limit,
       :offset,
-      :select
+      :select,
       to: :query_interface
 
     def query_interface
