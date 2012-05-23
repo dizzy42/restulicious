@@ -1,6 +1,8 @@
 module RestResource
   class QueryInterface
 
+    # attr_reader :params
+
     def initialize(url)
       @url = url
       @params = {}

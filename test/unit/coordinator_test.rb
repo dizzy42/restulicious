@@ -35,6 +35,7 @@ describe RestResource::Coordinator do
     it "uses the same query interface each time" do
       assert_equal @coordinator.query_interface, @coordinator.query_interface
     end
+
   end
 end
 
