@@ -12,20 +12,28 @@ module RestResource
       to: :query_interface
 
     def query_interface
-      @query_interface ||= RestResource::QueryInterface.new("")
+      @query_interface ||= RestResource::QueryInterface.new(@url)
     end
 
     def first
-      # connection.request(first_url, params)
+      # @response = connection.request(:get, first_url, params).response
+      # parse
     end
 
     def all
-      # connection.request(all_url, params)
+      # @response = connection.request(:get, all_url, params).response
+      # parse
     end
 
     def api_options(options)
-      # @url = options[:url]
+      @url = options[:url]
     end
+
+    private
+
+    # def parse
+    #   RestResource::Parser.new(@klazz, @response)
+    # end
 
   end
 end

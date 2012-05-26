@@ -36,6 +36,20 @@ describe RestResource::Coordinator do
       assert_equal @coordinator.query_interface, @coordinator.query_interface
     end
 
+    it "has api_options method, that stores url" do
+      url = "http://www.example.com"
+      @coordinator.api_options(url: url)
+      assert_equal url, @coordinator.instance_variable_get(:@url)
+    end
+
+    it "passes url along to query interface" do
+      url = "http://www.example.com"
+      @coordinator.api_options(url: url)
+      RestResource::QueryInterface.expects(:new).with(url)
+
+      @coordinator.query_interface
+    end
+
   end
 end
 
