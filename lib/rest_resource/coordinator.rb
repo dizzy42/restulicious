@@ -6,9 +6,6 @@ module RestResource
       :limit,
       :offset,
       :select,
-      # :first_url,
-      # :all_url,
-      # :params,
       to: :query_interface
 
     def query_interface
@@ -16,12 +13,12 @@ module RestResource
     end
 
     def first
-      # @response = connection.request(:get, first_url, params).response
+      # @response = connection.request(:get, query_interface.first_url, query_interface.params).response
       # parse
     end
 
     def all
-      # @response = connection.request(:get, all_url, params).response
+      # @response = connection.request(:get, query_interface.all_url, query_interface.params).response
       # parse
     end
 
