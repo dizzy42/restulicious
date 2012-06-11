@@ -8,6 +8,10 @@ module RestResource
       :select,
       to: :query_interface
 
+    def initialize(klazz)
+      @klazz = klazz
+    end
+
     def query_interface
       @query_interface ||= RestResource::QueryInterface.new(@url)
     end
@@ -16,14 +20,14 @@ module RestResource
       request = connection.get(query_interface.first_url, query_interface.params)
       hydra.queue(request)
       hydra.run
-      parse(request.response)
+      parse(request.response.body)
     end
 
     def all
       request = connection.get(query_interface.all_url, query_interface.params)
       hydra.queue(request)
       hydra.run
-      parse(request.response)
+      parse(request.response.body)
     end
 
     def api_options(options)
@@ -32,8 +36,12 @@ module RestResource
 
     private
 
-    def parse(response)
-      RestResource::Parser.new(@klazz, response)
+    def connection
+      Connection.new
+    end
+
+    def parse(body)
+      RestResource::Parser.new(@klazz, body).objects
     end
 
     def hydra

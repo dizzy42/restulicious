@@ -5,7 +5,7 @@ module RestResource
       request = ::Typhoeus::Request.new(url,
         method:        :get,
         headers:       { Accept: "text/json" },
-        timeout:       100, # milliseconds
+        timeout:       1000, # milliseconds
         cache_timeout: 60, # seconds
         params:        params)
     end

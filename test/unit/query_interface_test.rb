@@ -7,6 +7,12 @@ describe RestResource::QueryInterface do
       @interface = RestResource::QueryInterface.new("http://bigdeal.com/the/next/:thing")
     end
 
+    it "has params reader" do
+      params = { foo: "bar" }
+      @interface.instance_variable_set(:@params, params)
+      assert_equal params, @interface.params
+    end
+
     it "stores url in @url for from" do
       url = "http://twitter.com/rocks/and/stuff"
       @interface.from(url)

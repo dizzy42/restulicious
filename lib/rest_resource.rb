@@ -1,3 +1,5 @@
+require 'typhoeus'
+require 'json'
 require "rest_resource/version"
 require 'active_support/all'
 
@@ -7,4 +9,5 @@ module RestResource
   autoload :Coordinator,    "rest_resource/coordinator"
   autoload :QueryInterface, "rest_resource/query_interface"
   autoload :Connection,     "rest_resource/connection"
+  autoload :Parser,         "rest_resource/parser"
 end

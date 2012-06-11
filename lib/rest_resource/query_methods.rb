@@ -39,7 +39,7 @@ module RestResource
       end
 
       def coordinator
-        @coordinator ||= RestResource::Coordinator.new
+        @coordinator ||= RestResource::Coordinator.new(self)
       end
 
     end
