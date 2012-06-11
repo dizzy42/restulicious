@@ -6,4 +6,5 @@ module RestResource
   autoload :QueryMethods,   "rest_resource/query_methods"
   autoload :Coordinator,    "rest_resource/coordinator"
   autoload :QueryInterface, "rest_resource/query_interface"
+  autoload :Connection,     "rest_resource/connection"
 end

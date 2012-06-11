@@ -13,13 +13,17 @@ module RestResource
     end
 
     def first
-      # @response = connection.request(:get, query_interface.first_url, query_interface.params).response
-      # parse
+      request = connection.get(query_interface.first_url, query_interface.params)
+      hydra.queue(request)
+      hydra.run
+      parse(request.response)
     end
 
     def all
-      # @response = connection.request(:get, query_interface.all_url, query_interface.params).response
-      # parse
+      request = connection.get(query_interface.all_url, query_interface.params)
+      hydra.queue(request)
+      hydra.run
+      parse(request.response)
     end
 
     def api_options(options)
@@ -28,9 +32,13 @@ module RestResource
 
     private
 
-    # def parse
-    #   RestResource::Parser.new(@klazz, @response)
-    # end
+    def parse(response)
+      RestResource::Parser.new(@klazz, response)
+    end
+
+    def hydra
+      @hydra ||= Typhoeus::Hydra.new
+    end
 
   end
 end
