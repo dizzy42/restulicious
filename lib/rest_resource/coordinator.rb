@@ -15,22 +15,22 @@ module RestResource
     end
 
     def from(*args)
-      query_interface.from(args)
+      query_interface.from(*args)
       self
     end
 
     def limit(*args)
-      query_interface.limit(args)
+      query_interface.limit(*args)
       self
     end
 
     def offset(*args)
-      query_interface.offset(args)
+      query_interface.offset(*args)
       self
     end
 
     def select(*args)
-      query_interface.select(args)
+      query_interface.select(*args)
       self
     end
 

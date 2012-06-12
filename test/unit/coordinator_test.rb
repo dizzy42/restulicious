@@ -4,7 +4,8 @@ describe RestResource::Coordinator do
   describe "Interface" do
 
     before do
-      @coordinator = RestResource::Coordinator.new
+      @coordinator = RestResource::Coordinator.new(Class.new)
+      @coordinator.instance_variable_set(:@url, "www.example.com")
     end
 
     it "has where method, which sends to interface" do
