@@ -10,22 +10,27 @@ module RestResource
 
     def where(params)
       @params.merge!(params)
+      self
     end
 
     def from(url)
       @url = url
+      self
     end
 
     def limit(limit)
       @params[:limit] = limit
+      self
     end
 
     def offset(offset)
       @params[:offset] = offset
+      self
     end
 
     def select(fields)
       @params[:fields] = fields
+      self
     end
 
     def all_url
@@ -41,7 +46,7 @@ module RestResource
     def interpolated_url
       interpolated_url = @url
       @params.each do |key, value|
-        interpolated_url.gsub! /:#{key}/, value.to_s
+        interpolated_url = interpolated_url.gsub /:#{key}/, value.to_s
       end
       interpolated_url
     end
