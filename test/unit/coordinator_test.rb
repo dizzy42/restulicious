@@ -51,6 +51,13 @@ describe RestResource::Coordinator do
       @coordinator.query_interface
     end
 
+    it "chains interface methods on coordinator" do
+      @coordinator.expects(:all)
+      @coordinator.from("www.what.com").offset(10).limit(100).where(id: 42).select("id,name").all
+    end
+
+    it "has first method"
+    it "has all method"
   end
 end
 
