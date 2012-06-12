@@ -8,8 +8,12 @@ module RestResource
 
     def objects
       objects = []
-      hashified_body[key].each do |object_attributes|
-        objects << @klazz.from_api(object_attributes.symbolize_keys!)
+      if collection?
+        hashified_body[key].each do |object_attributes|
+          objects << @klazz.from_api(object_attributes.symbolize_keys!)
+        end
+      else
+        objects << @klazz.from_api(hashified_body.symbolize_keys!)
       end
       objects
     end
@@ -21,7 +25,11 @@ module RestResource
     end
 
     def hashified_body
-      JSON.parse(@body)
+      @hashified_body ||= JSON.parse(@body)
+    end
+
+    def collection?
+      hashified_body[key].is_a?(Array)
     end
 
   end
