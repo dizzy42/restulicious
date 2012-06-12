@@ -1,19 +1,37 @@
 module RestResource
   class Coordinator
 
-    delegate :where,
-      :from,
-      :limit,
-      :offset,
-      :select,
-      to: :query_interface
-
     def initialize(klazz)
       @klazz = klazz
     end
 
     def query_interface
       @query_interface ||= RestResource::QueryInterface.new(@url)
+    end
+
+    def where(*args)
+      query_interface.where(*args)
+      self
+    end
+
+    def from(*args)
+      query_interface.from(args)
+      self
+    end
+
+    def limit(*args)
+      query_interface.limit(args)
+      self
+    end
+
+    def offset(*args)
+      query_interface.offset(args)
+      self
+    end
+
+    def select(*args)
+      query_interface.select(args)
+      self
     end
 
     def first
@@ -27,6 +45,7 @@ module RestResource
       request = connection.get(query_interface.all_url, query_interface.params)
       hydra.queue(request)
       hydra.run
+      p request
       parse(request.response.body)
     end
 
