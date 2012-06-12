@@ -45,7 +45,6 @@ module RestResource
       request = connection.get(query_interface.all_url, query_interface.params)
       hydra.queue(request)
       hydra.run
-      p request
       parse(request.response.body)
     end
 
