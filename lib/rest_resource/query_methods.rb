@@ -24,6 +24,10 @@ module RestResource
         coordinator.select(fields)
       end
 
+      def includes(*args)
+        coordinator.includes(*args)
+      end
+
       def first
         coordinator.first
       end

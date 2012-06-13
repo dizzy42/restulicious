@@ -3,6 +3,7 @@ module RestResource
 
     def initialize(klazz)
       @klazz = klazz
+      @after_complete_methods = []
     end
 
     def query_interface
@@ -34,18 +35,23 @@ module RestResource
       self
     end
 
+    def includes(*args)
+      @after_complete_methods = args
+      self
+    end
+
     def first
-      request = connection.get(query_interface.first_url, query_interface.params)
-      hydra.queue(request)
+      @request = connection.get(query_interface.first_url, query_interface.params)
+      hydra.queue(@request)
       hydra.run
-      parse(request.response.body)
+      parse
     end
 
     def all
-      request = connection.get(query_interface.all_url, query_interface.params)
-      hydra.queue(request)
+      @request = connection.get(query_interface.all_url, query_interface.params)
+      hydra.queue(@request)
       hydra.run
-      parse(request.response.body)
+      parse
     end
 
     def api_options(options)
@@ -58,8 +64,12 @@ module RestResource
       Connection.new
     end
 
-    def parse(body)
-      RestResource::Parser.new(@klazz, body).objects
+    def parse
+      objects = RestResource::Parser.new(@klazz, @request.response.body).objects
+      @after_complete_methods.each do |name|
+        @klazz.send("after_api_complete_#{name}", objects)
+      end
+      objects
     end
 
     def hydra

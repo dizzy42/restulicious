@@ -50,5 +50,14 @@ describe RestResource::QueryMethods do
     DummyClass.send(:api_options, options)
   end
 
+  it "has includes method, which sends to coordinator" do
+    RestResource::Coordinator.any_instance.expects(:includes).with(:user)
+    DummyClass.includes(:user)
+  end
+
+  it "has includes method, that allows multiple arguments" do
+    RestResource::Coordinator.any_instance.expects(:includes).with(:user, :comments)
+    DummyClass.includes(:user, :comments)
+  end
 end
 
