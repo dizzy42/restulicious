@@ -4,7 +4,7 @@
 
 require 'minitest/autorun'
 require 'mocha'
-require 'rest_resource'
+require 'restulicious'
 
 # Load support files
 Dir["#{File.dirname(__FILE__)}/**/*.rb"].each { |f| require f }

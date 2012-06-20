@@ -1,4 +1,4 @@
-module RestResource
+module Restulicious
   class Connection
 
     def get(url, params)

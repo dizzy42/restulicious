@@ -1,4 +1,4 @@
-module RestResource
+module Restulicious
   class QueryInterface
 
     attr_reader :params

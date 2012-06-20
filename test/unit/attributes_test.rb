@@ -1,9 +1,9 @@
 require File.expand_path('../../support/test_helper', __FILE__)
 
-describe RestResource::Attributes do
+describe Restulicious::Attributes do
 
   before do
-    DummyClass.send(:include, RestResource::Attributes)
+    DummyClass.send(:include, Restulicious::Attributes)
     DummyClass.attributes(:id, :name)
 
     @object = DummyClass.new

@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/rest_resource/version', __FILE__)
+require File.expand_path('../lib/restulicious/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Tim Payton"]
@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "restulicious"
   gem.require_paths = ["lib"]
-  gem.version       = RestResource::VERSION
+  gem.version       = Restulicious::VERSION
 
   gem.add_dependency('activesupport', '>= 3.0.0')
   gem.add_dependency('i18n')
@@ -21,4 +21,5 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency('minitest', '>= 3.0.0')
   gem.add_development_dependency('mocha')
+  gem.add_development_dependency('rake')
 end

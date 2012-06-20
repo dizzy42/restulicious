@@ -1,4 +1,4 @@
-module RestResource
+module Restulicious
   class Parser
 
     def initialize(klazz, body)

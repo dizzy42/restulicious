@@ -1,4 +1,4 @@
-module RestResource
+module Restulicious
   class Coordinator
 
     def initialize(klazz)
@@ -7,7 +7,7 @@ module RestResource
     end
 
     def query_interface
-      @query_interface ||= RestResource::QueryInterface.new(@url)
+      @query_interface ||= Restulicious::QueryInterface.new(@url)
     end
 
     def where(*args)
@@ -65,7 +65,7 @@ module RestResource
     end
 
     def parse
-      objects = RestResource::Parser.new(@klazz, @request.response.body).objects
+      objects = Restulicious::Parser.new(@klazz, @request.response.body).objects
       @after_complete_methods.each do |name|
         @klazz.send("after_api_complete_#{name}", objects)
       end

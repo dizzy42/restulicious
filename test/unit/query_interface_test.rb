@@ -1,10 +1,10 @@
 require File.expand_path('../../support/test_helper', __FILE__)
 
-describe RestResource::QueryInterface do
+describe Restulicious::QueryInterface do
   describe "Interface" do
 
     before do
-      @interface = RestResource::QueryInterface.new("http://bigdeal.com/the/next/:thing")
+      @interface = Restulicious::QueryInterface.new("http://bigdeal.com/the/next/:thing")
     end
 
     it "has params reader" do

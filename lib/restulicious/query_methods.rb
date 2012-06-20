@@ -1,4 +1,4 @@
-module RestResource
+module Restulicious
   module QueryMethods
     extend ::ActiveSupport::Concern
 
@@ -43,7 +43,7 @@ module RestResource
       end
 
       def coordinator
-        @coordinator ||= RestResource::Coordinator.new(self)
+        @coordinator ||= Restulicious::Coordinator.new(self)
       end
 
     end

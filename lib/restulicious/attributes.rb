@@ -1,4 +1,4 @@
-module RestResource
+module Restulicious
   module Attributes
     extend ::ActiveSupport::Concern
 
