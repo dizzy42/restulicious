@@ -54,6 +54,13 @@ module Restulicious
       parse
     end
 
+    def create
+      @request = connection.post(query_interface.all_url, query_interface.params)
+      hydra.queue(@request)
+      hydra.run
+      # parse
+    end
+
     def api_options(options)
       @url = options[:url]
     end

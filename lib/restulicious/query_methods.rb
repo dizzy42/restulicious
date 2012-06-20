@@ -36,6 +36,10 @@ module Restulicious
         coordinator.all
       end
 
+      def create
+        coordinator.create
+      end
+
       private
 
       def api_options(options)
