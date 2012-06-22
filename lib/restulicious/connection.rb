@@ -18,6 +18,7 @@ module Restulicious
         cache_timeout: 60, # seconds
         body:          params.to_json)
     end
+
   end
 end
 

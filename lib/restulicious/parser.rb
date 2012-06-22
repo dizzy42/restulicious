@@ -16,6 +16,11 @@ module Restulicious
         objects << @klazz.from_api(hashified_body.symbolize_keys!)
       end
       objects
+      # Collection.new({
+      #   objects_key: key,
+      #   objects:     objects,
+      #   total:       hashified_body[:total]
+      # })
     end
 
     private
