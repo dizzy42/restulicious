@@ -44,15 +44,14 @@ module Restulicious
       @request = connection.get(query_interface.first_url, query_interface.params)
       hydra.queue(@request)
       hydra.run
-      parse
+      parse.first
     end
 
     def all
       @request = connection.get(query_interface.all_url, query_interface.params)
       hydra.queue(@request)
       hydra.run
-      object = parse
-      object.is_a?(Array) ? object.first : object
+      parse
     end
 
     def create
