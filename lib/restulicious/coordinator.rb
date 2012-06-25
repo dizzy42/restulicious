@@ -51,7 +51,8 @@ module Restulicious
       @request = connection.get(query_interface.all_url, query_interface.params)
       hydra.queue(@request)
       hydra.run
-      parse
+      object = parse
+      object.is_a?(Array) ? object.first : object
     end
 
     def create
@@ -62,7 +63,8 @@ module Restulicious
     end
 
     def api_options(options)
-      @url = options[:url]
+      @url  = options[:url]
+      @type = options[:type]
     end
 
     private
