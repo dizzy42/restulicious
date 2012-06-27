@@ -4,7 +4,7 @@ module Restulicious
     def get(url, params)
       request = ::Typhoeus::Request.new(url,
         method:        :get,
-        headers:       { Accept: "text/json" },
+        headers:       { Accept: "application/json" },
         timeout:       100000, # milliseconds
         cache_timeout: 60, # seconds
         params:        params)
@@ -13,7 +13,7 @@ module Restulicious
     def post(url, params)
       request = ::Typhoeus::Request.new(url,
         method:        :post,
-        headers:       { Accept: "text/json" },
+        headers:       { Accept: "application/json" },
         timeout:       100000, # milliseconds
         cache_timeout: 60, # seconds
         body:          params.to_json)
