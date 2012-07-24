@@ -81,7 +81,7 @@ module Restulicious
     end
 
     def hydra
-      @hydra ||= Typhoeus::Hydra.new
+      @hydra ||= Restulicious.hydra
     end
 
   end

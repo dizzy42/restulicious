@@ -10,4 +10,12 @@ module Restulicious
   autoload :QueryInterface, "restulicious/query_interface"
   autoload :Connection,     "restulicious/connection"
   autoload :Parser,         "restulicious/parser"
+
+  def self.hydra
+    @@hydra ||= Typhoeus::Hydra.new
+  end
+
+  def self.hydra=(hydra)
+    @@hydra = hydra
+  end
 end
