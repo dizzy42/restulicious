@@ -64,6 +64,7 @@ module Restulicious
     def api_options(options)
       @url  = options[:url]
       @type = options[:type]
+      @key  = options[:key]
     end
 
     private
@@ -73,7 +74,7 @@ module Restulicious
     end
 
     def parse
-      objects = Restulicious::Parser.new(@klazz, @request.response.body).objects
+      objects = Restulicious::Parser.new(@klazz, key, @request.response.body).objects
       @after_complete_methods.each do |name|
         @klazz.send("after_api_complete_#{name}", objects)
       end
@@ -82,6 +83,10 @@ module Restulicious
 
     def hydra
       @hydra ||= Restulicious.hydra
+    end
+
+    def key
+      @key || @klazz.to_s.downcase.pluralize
     end
 
   end

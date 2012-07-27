@@ -1,15 +1,16 @@
 module Restulicious
   class Parser
 
-    def initialize(klazz, body)
+    def initialize(klazz, key, body)
       @klazz = klazz
-      @body = body
+      @key   = key
+      @body  = body
     end
 
     def objects
       objects = []
       if collection?
-        hashified_body[key].each do |object_attributes|
+        hashified_body[@key].each do |object_attributes|
           objects << @klazz.from_api(object_attributes.symbolize_keys!)
         end
       else
@@ -20,16 +21,12 @@ module Restulicious
 
     private
 
-    def key
-      @klazz.to_s.downcase.pluralize
-    end
-
     def hashified_body
       @hashified_body ||= JSON.parse(@body)
     end
 
     def collection?
-      hashified_body[key].is_a?(Array)
+      hashified_body[@key].is_a?(Array)
     end
 
   end
