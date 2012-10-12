@@ -6,16 +6,18 @@ require 'active_support/all'
 module Restulicious
   autoload :Attributes,     "restulicious/attributes"
   autoload :QueryMethods,   "restulicious/query_methods"
-  autoload :Coordinator,    "restulicious/coordinator"
   autoload :QueryInterface, "restulicious/query_interface"
+  autoload :Config,         "restulicious/config"
+  autoload :Coordinator,    "restulicious/coordinator"
   autoload :Connection,     "restulicious/connection"
   autoload :Parser,         "restulicious/parser"
 
-  def self.hydra
-    @@hydra ||= Typhoeus::Hydra.new
-  end
-
-  def self.hydra=(hydra)
-    @@hydra = hydra
+  def self.config
+    @config ||= Config.new
+    if block_given?
+      yield @config
+    else
+      @config
+    end
   end
 end

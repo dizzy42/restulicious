@@ -70,11 +70,15 @@ module Restulicious
     private
 
     def connection
-      Connection.new
+      Restulicious.config.connection_class.new
+    end
+
+    def parser
+      Restulicious.config.parser_class.new(@klazz, key, @request.response.body)
     end
 
     def parse
-      objects = Restulicious::Parser.new(@klazz, key, @request.response.body).objects
+      objects = parser.objects
       @after_complete_methods.each do |name|
         @klazz.send("after_api_complete_#{name}", objects)
       end
@@ -82,7 +86,7 @@ module Restulicious
     end
 
     def hydra
-      @hydra ||= Restulicious.hydra
+      Restulicious.config.hydra
     end
 
     def key
