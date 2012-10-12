@@ -4,9 +4,9 @@ describe Restulicious::Config do
   describe "with block" do
     it "has defaults" do
       Restulicious.config {}
-      assert_kind_of Typhoeus::Hydra,          Restulicious.config.hydra
-      assert_equal   Restulicious::Parser,     Restulicious.config.parser_class
-      assert_equal   Restulicious::Connection, Restulicious.config.connection_class
+      assert_kind_of Typhoeus::Hydra,                   Restulicious.config.hydra
+      assert_equal   Restulicious::Parser,              Restulicious.config.parser_class
+      assert_equal   Restulicious::Connection::Default, Restulicious.config.connection_class
     end
 
     it "set options overrides defaults" do
@@ -33,9 +33,9 @@ describe Restulicious::Config do
 
   describe "without block" do
     it "has defaults" do
-      assert_kind_of Typhoeus::Hydra,          Restulicious.config.hydra
-      assert_equal   Restulicious::Parser,     Restulicious.config.parser_class
-      assert_equal   Restulicious::Connection, Restulicious.config.connection_class
+      assert_kind_of Typhoeus::Hydra,                   Restulicious.config.hydra
+      assert_equal   Restulicious::Parser,              Restulicious.config.parser_class
+      assert_equal   Restulicious::Connection::Default, Restulicious.config.connection_class
     end
 
     it "set options overrides defaults" do

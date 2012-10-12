@@ -9,8 +9,9 @@ module Restulicious
   autoload :QueryInterface, "restulicious/query_interface"
   autoload :Config,         "restulicious/config"
   autoload :Coordinator,    "restulicious/coordinator"
-  autoload :Connection,     "restulicious/connection"
   autoload :Parser,         "restulicious/parser"
+  autoload :Connection,     "restulicious/connection"
+  Connection.autoload :Default, "restulicious/connection/default"
 
   def self.config
     @config ||= Config.new

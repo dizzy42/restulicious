@@ -5,7 +5,7 @@ module Restulicious
 
     def initialize
       self.hydra            = Typhoeus::Hydra.new
-      self.connection_class = Connection
+      self.connection_class = Connection::Default
       self.parser_class     = Parser
     end
 
