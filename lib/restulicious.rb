@@ -12,6 +12,7 @@ module Restulicious
   autoload :Parser,         "restulicious/parser"
   autoload :Connection,     "restulicious/connection"
   Connection.autoload :Default, "restulicious/connection/default"
+  Connection.autoload :RESTApi, "restulicious/connection/rest_api"
 
   def self.config
     @config ||= Config.new
