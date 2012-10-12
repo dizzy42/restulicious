@@ -7,16 +7,14 @@ module Restulicious
       @body  = body
     end
 
-    def objects
-      objects = []
+    def result
       if collection?
-        hashified_body[@key].each do |object_attributes|
-          objects << @klazz.from_api(object_attributes.symbolize_keys!)
-        end
+        set_collection
+        hashified_body.each { |k, v| struct.k = v }
+        struct
       else
-        objects << @klazz.from_api(hashified_body.symbolize_keys!)
+        @klazz.from_api(hashified_body.symbolize_keys!)
       end
-      objects
     end
 
     private
@@ -27,6 +25,18 @@ module Restulicious
 
     def collection?
       hashified_body[@key].is_a?(Array)
+    end
+
+    def struct
+      @struct ||= Struct.new
+    end
+
+    def set_collection
+      collection = {}
+      hashified_body.delete(@key).each do |object_attributes|
+        collection << @klazz.from_api(object_attributes.symbolize_keys!)
+      end
+      struct.send(@key, collection)
     end
 
   end

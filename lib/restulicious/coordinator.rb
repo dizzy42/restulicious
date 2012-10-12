@@ -44,14 +44,14 @@ module Restulicious
       @request = connection.get(query_interface.first_url, query_interface.params)
       hydra.queue(@request)
       hydra.run
-      parse.first
+      parser.result
     end
 
     def all
       @request = connection.get(query_interface.all_url, query_interface.params)
       hydra.queue(@request)
       hydra.run
-      parse
+      parser.result
     end
 
     def create
@@ -75,14 +75,6 @@ module Restulicious
 
     def parser
       Restulicious.config.parser_class.new(@klazz, key, @request.response.body)
-    end
-
-    def parse
-      objects = parser.objects
-      @after_complete_methods.each do |name|
-        @klazz.send("after_api_complete_#{name}", objects)
-      end
-      objects
     end
 
     def hydra
