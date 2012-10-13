@@ -24,20 +24,16 @@ module Restulicious
         coordinator.select(fields)
       end
 
-      def includes(*args)
-        coordinator.includes(*args)
+      def first(&block)
+        coordinator.first(&block)
       end
 
-      def first
-        coordinator.first
+      def all(&block)
+        coordinator.all(&block)
       end
 
-      def all
-        coordinator.all
-      end
-
-      def create
-        coordinator.create
+      def create(&block)
+        coordinator.create(&block)
       end
 
       private

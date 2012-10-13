@@ -41,7 +41,6 @@ describe Restulicious::QueryMethods do
     DummyClass.all
   end
 
-
   it "has api_options method, which sends to coordinator" do
     options = {
       url:    "www.awesome.com/stuff"
@@ -50,14 +49,5 @@ describe Restulicious::QueryMethods do
     DummyClass.send(:api_options, options)
   end
 
-  it "has includes method, which sends to coordinator" do
-    Restulicious::Coordinator.any_instance.expects(:includes).with(:user)
-    DummyClass.includes(:user)
-  end
-
-  it "has includes method, that allows multiple arguments" do
-    Restulicious::Coordinator.any_instance.expects(:includes).with(:user, :comments)
-    DummyClass.includes(:user, :comments)
-  end
 end
 

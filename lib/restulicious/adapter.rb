@@ -1,4 +1,4 @@
 module Restulicious
-  module Parser
+  module Adapter
   end
 end

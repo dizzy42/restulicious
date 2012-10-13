@@ -56,11 +56,6 @@ describe Restulicious::Coordinator do
       @coordinator.from("www.what.com").offset(10).limit(100).where(id: 42).select("id,name").all
     end
 
-    it "includes stores args in after_complete_methods" do
-      @coordinator.includes(:users, :comments)
-      assert_equal [:users, :comments], @coordinator.instance_variable_get(:@after_complete_methods)
-    end
-
     it "has first method"
     it "has all method"
   end

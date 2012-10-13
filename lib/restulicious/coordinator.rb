@@ -3,7 +3,6 @@ module Restulicious
 
     def initialize(klazz)
       @klazz = klazz
-      @after_complete_methods = []
     end
 
     def query_interface
@@ -35,30 +34,16 @@ module Restulicious
       self
     end
 
-    def includes(*args)
-      @after_complete_methods = args
-      self
+    def first(&block)
+      adapter.get(query_interface.first_url, query_interface.params, &block)
     end
 
-    def first
-      @request = connection.get(query_interface.first_url, query_interface.params)
-      hydra.queue(@request)
-      hydra.run
-      parser.result
+    def all(&block)
+      adapter.get(query_interface.first_url, query_interface.params, &block)
     end
 
-    def all
-      @request = connection.get(query_interface.all_url, query_interface.params)
-      hydra.queue(@request)
-      hydra.run
-      parser.result
-    end
-
-    def create
-      @request = connection.post(query_interface.all_url, query_interface.params)
-      hydra.queue(@request)
-      hydra.run
-      # parse
+    def create(&block)
+      adapter.post(query_interface.first_url, query_interface.params, &block)
     end
 
     def api_options(options)
@@ -69,16 +54,8 @@ module Restulicious
 
     private
 
-    def connection
-      Restulicious.config.connection_class.new
-    end
-
-    def parser
-      Restulicious.config.parser_class.new(@klazz, key, @request.response.body)
-    end
-
-    def hydra
-      Restulicious.config.hydra
+    def adapter
+      Restulicious.config.adapter_class.new(@klazz, key)
     end
 
     def key
