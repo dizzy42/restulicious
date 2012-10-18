@@ -11,8 +11,7 @@ module Restulicious
       def result
         if collection?
           set_collection
-          hashified_body.each { |k, v| struct.k = v }
-          struct
+          hashified_body
         else
           @klazz.from_api(hashified_body.symbolize_keys!)
         end
@@ -29,15 +28,15 @@ module Restulicious
       end
 
       def struct
-        @struct ||= Struct.new
+        @struct ||= OpenStruct.new
       end
 
       def set_collection
-        collection = {}
+        collection = []
         hashified_body.delete(@key).each do |object_attributes|
           collection << @klazz.from_api(object_attributes.symbolize_keys!)
         end
-        struct.send(@key, collection)
+        hashified_body[@key] = collection
       end
 
     end

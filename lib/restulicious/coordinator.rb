@@ -46,6 +46,21 @@ module Restulicious
       adapter.post(query_interface.first_url, query_interface.params, &block)
     end
 
+    def on_failure(&block)
+      adapter.on_failure(&block)
+      self
+    end
+
+    def on_success(&block)
+      adapter.on_success(&block)
+      self
+    end
+
+    def on_complete(&block)
+      adapter.on_complete(&block)
+      self
+    end
+
     def api_options(options)
       @url  = options[:url]
       @type = options[:type]
@@ -55,7 +70,7 @@ module Restulicious
     private
 
     def adapter
-      Restulicious.config.adapter_class.new(@klazz, key)
+      @adapter ||= Restulicious.config.adapter_class.new(@klazz, key)
     end
 
     def key
