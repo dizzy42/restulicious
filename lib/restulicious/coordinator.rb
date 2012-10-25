@@ -1,8 +1,9 @@
 module Restulicious
   class Coordinator
 
-    def initialize(klazz)
+    def initialize(klazz, api_options)
       @klazz = klazz
+      api_options(api_options)
     end
 
     def query_interface

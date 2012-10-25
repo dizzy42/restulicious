@@ -39,11 +39,11 @@ module Restulicious
       private
 
       def api_options(options)
-        coordinator.api_options(options)
+        @api_options = options
       end
 
       def coordinator
-        @coordinator ||= Restulicious::Coordinator.new(self)
+        Restulicious::Coordinator.new(self, @api_options)
       end
 
     end
