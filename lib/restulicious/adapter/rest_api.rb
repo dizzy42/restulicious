@@ -9,11 +9,13 @@ module Restulicious
 
       def get(url, params, &block)
         request = ::RESTApi.get(url, params)
+        request.queue
         handle_response(request, &block)
       end
 
       def post(url, params, &block)
         request = ::RESTApi.post(url, params)
+        request.queue
         handle_response(request, &block)
       end
 
