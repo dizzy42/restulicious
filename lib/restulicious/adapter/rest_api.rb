@@ -8,15 +8,13 @@ module Restulicious
       end
 
       def get(url, params, &block)
-        request = ::RESTApi.get(url, params)
-        request.queue if request.respond_to?(:queue)
-        handle_response(request, &block)
+        @request = ::RESTApi.get(url, params)
+        handle_response(&block)
       end
 
       def post(url, params, &block)
-        request = ::RESTApi.post(url, params)
-        request.queue if request.respond_to?(:queue)
-        handle_response(request, &block)
+        @request = ::RESTApi.post(url, params)
+        handle_response(&block)
       end
 
       def on_success(&block)
@@ -41,29 +39,42 @@ module Restulicious
         Restulicious.config.hydra
       end
 
-      def handle_response(request, &block)
+      def should_run_request?(&block)
+        !block_given? && !@on_success && !@on_complete
+      end
+
+      def run_request
+        @request.queue if @request.respond_to?(:queue)
+        hydra.run
+        parser(@request.response).result
+      end
+
+      def handle_response(&block)
         if @on_success
-          request.on_success do |response|
+          @request.on_success do |response|
             @on_success.call(parser(response).result)
           end
         end
         if @on_complete
-          request.on_complete do |response|
+          @request.on_complete do |response|
             @on_complete.call(parser(response).result)
           end
         end
         if @on_failure
-          request.on_failure do |response|
+          @request.on_failure do |response|
             @on_failure.call(parser(response).result)
           end
         end
         if block_given?
-          request.on_complete do |response|
+          @request.on_complete do |response|
             block.call(parser(response).result)
           end
-        elsif !@on_success && !@on_complete
-          hydra.run
-          parser(request.response).result
+        end
+        if should_run_request?(&block)
+          run_request
+        else
+          @request.queue if @request.respond_to?(:queue)
+          @request
         end
       end
     end
