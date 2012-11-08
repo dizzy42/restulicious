@@ -19,7 +19,7 @@ module Restulicious
       self.class.attribute_names.each do |attr_name|
         instance_variable_set("@#{attr_name}", check_utf8(attributes[attr_name]))
       end
-      super
+      super()
     end
 
     private
