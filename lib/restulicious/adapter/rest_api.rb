@@ -61,8 +61,8 @@ module Restulicious
           end
         end
         if @on_failure
-          @request.on_failure do |response|
-            @on_failure.call(parser(response).result)
+          @request.on_failure do |response, exception|
+            @on_failure.call(response, exception)
           end
         end
         if block_given?
