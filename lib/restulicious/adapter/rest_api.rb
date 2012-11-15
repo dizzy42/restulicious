@@ -17,6 +17,11 @@ module Restulicious
         handle_response(&block)
       end
 
+      def put(url, params, &block)
+        @request = ::RESTApi.put(url, params)
+        handle_response(&block)
+      end
+
       def on_success(&block)
         @on_success = block
       end
