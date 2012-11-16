@@ -4,7 +4,7 @@ describe Restulicious::Coordinator do
   describe "Interface" do
 
     before do
-      @coordinator = Restulicious::Coordinator.new(Class.new)
+      @coordinator = Restulicious::Coordinator.new(Class.new, {})
       @coordinator.instance_variable_set(:@url, "www.example.com")
     end
 

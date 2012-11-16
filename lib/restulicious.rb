@@ -9,6 +9,7 @@ module Restulicious
   autoload :QueryInterface,  "restulicious/query_interface"
   autoload :Config,          "restulicious/config"
   autoload :Coordinator,     "restulicious/coordinator"
+  autoload :Collection,      "restulicious/collection"
   autoload :Adapter,         "restulicious/adapter"
   Adapter.autoload :Default, "restulicious/adapter/default"
   Adapter.autoload :RESTApi, "restulicious/adapter/rest_api"

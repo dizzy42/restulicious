@@ -63,6 +63,7 @@ module Restulicious
     end
 
     def api_options(options)
+      option ||= {}
       @url  = options[:url]
       @type = options[:type]
       @key  = options[:key]
