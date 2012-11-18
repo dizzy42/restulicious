@@ -4,6 +4,14 @@ module Restulicious
 
     module ClassMethods
 
+      def basic_auth(username, password)
+        coordinator.basic_auth(username, password)
+      end
+
+      def headers(header_hash)
+        coordinator.headers(header_hash)
+      end
+
       def where(params)
         coordinator.where(params)
       end

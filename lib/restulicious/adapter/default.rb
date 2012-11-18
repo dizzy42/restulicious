@@ -2,29 +2,21 @@ module Restulicious
   module Adapter
     class Default
 
-      def initialize(klazz, key)
-        @klazz = klazz
-        @key   = key
+      def initialize(klazz, key, request_options, headers)
+        @klazz           = klazz
+        @key             = key
+        @request_options = request_options
+        @headers         = headers
       end
 
       def get(url, params, &block)
-        request = ::Typhoeus::Request.new(url,
-          method:        :get,
-          headers:       { Accept: "application/json" },
-          timeout:       100000, # milliseconds
-          cache_timeout: 60, # seconds
-          params:        params)
+        request = ::Typhoeus::Request.new(url, request_options.merge(method: :get, params: params))
         hydra.queue(request)
         handle_response(request, &block)
       end
 
       def post(url, params, &block)
-        request = ::Typhoeus::Request.new(url,
-          method:        :post,
-          headers:       { Accept: "application/json" },
-          timeout:       100000, # milliseconds
-          cache_timeout: 60, # seconds
-          body:          params.to_json)
+        request = ::Typhoeus::Request.new(url, request_options.merge(method: :post, body: params.to_json))
         hydra.queue(request)
         handle_response(request, &block)
       end
@@ -42,6 +34,14 @@ module Restulicious
       end
 
       private
+
+      def request_options
+          {
+            headers:       { Accept: "application/json" }.merge(@headers),
+            timeout:       100000, # milliseconds
+            cache_timeout: 60 # seconds
+          }.merge(@request_options)
+      end
 
       def parser(response)
         Restulicious.config.parser_class.new(@klazz, @key, response.body)

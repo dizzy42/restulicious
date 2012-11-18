@@ -1,13 +1,30 @@
 module Restulicious
   class Coordinator
 
+    attr_accessor :request_options, :headers
+
     def initialize(klazz, api_options)
       @klazz = klazz
       api_options(api_options)
+      @request_options ||= {}
+      @headers ||= {}
     end
 
     def query_interface
       @query_interface ||= Restulicious::QueryInterface.new(@url)
+    end
+
+    def basic_auth(username, password)
+      request_options[:username] = username
+      request_options[:password] = password
+      self
+    end
+
+    def headers(header_hash)
+      header_hash.each do |key, value|
+        @headers[key] = value
+      end
+      self
     end
 
     def where(*args)
@@ -72,7 +89,7 @@ module Restulicious
     private
 
     def adapter
-      @adapter ||= Restulicious.config.adapter_class.new(@klazz, key)
+      @adapter ||= Restulicious.config.adapter_class.new(@klazz, key, request_options, @headers)
     end
 
     def key

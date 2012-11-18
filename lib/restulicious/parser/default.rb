@@ -10,7 +10,15 @@ module Restulicious
 
       def result
         if collection?
-          Restulicious::Collection.from_parser(@klazz, @collection_key, hashified_body)
+          if @collection_key
+            collection = []
+            hashified_body.each do |object_attributes|
+              collection << @klazz.from_api(object_attributes.symbolize_keys!)
+            end
+            collection
+          else
+            Restulicious::Collection.from_parser(@klazz, @collection_key, hashified_body)
+          end
         else
           @klazz.from_api(hashified_body.symbolize_keys!)
         end
@@ -23,7 +31,11 @@ module Restulicious
       end
 
       def collection?
-        hashified_body[@collection_key].is_a?(Array)
+        if @collection_key == "none"
+          hashified_body.is_a?(Array)
+        else
+          hashified_body[@collection_key].is_a?(Array)
+        end
       end
 
     end
