@@ -2,7 +2,7 @@ module Restulicious
   module Adapter
     class RESTApi
 
-      def initialize(klazz, key)
+      def initialize(klazz, key, request_options, headers)
         @klazz = klazz
         @key   = key
       end
