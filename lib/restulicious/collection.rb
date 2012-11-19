@@ -20,6 +20,10 @@ module Restulicious
       send(collection_key).empty?
     end
 
+    def size
+      send(collection_key).size
+    end
+
     private
 
     def self.setup_collection_of_items(klazz, collection_key, attributes)

@@ -10,7 +10,7 @@ module Restulicious
 
       def result
         if collection?
-          if @collection_key
+          if @collection_key == "none"
             collection = []
             hashified_body.each do |object_attributes|
               collection << @klazz.from_api(object_attributes.symbolize_keys!)
