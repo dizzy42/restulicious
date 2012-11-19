@@ -19,7 +19,7 @@ module Restulicious
 
     def method_missing(sym, *args, &block)
       if collection_accessor.respond_to?(sym)
-        collection_accessor.call(sym, *args, &block)
+        collection_accessor.send(sym, *args, &block)
       else
         super(sym, *args, &block)
       end
