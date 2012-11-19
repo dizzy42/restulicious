@@ -16,6 +16,10 @@ module Restulicious
       send(collection_key).each { |item| block.call(item) }
     end
 
+    def empty?
+      send(collection_key).empty?
+    end
+
     private
 
     def self.setup_collection_of_items(klazz, collection_key, attributes)
