@@ -13,7 +13,7 @@ module Restulicious
     end
 
     def each(&block)
-      send(collection_key).each { |item| block.call(item) }
+      send(collection_key).each(&block)
     end
 
     def empty?
