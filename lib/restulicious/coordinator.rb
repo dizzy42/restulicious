@@ -64,6 +64,10 @@ module Restulicious
       adapter.post(query_interface.first_url, query_interface.params, &block)
     end
 
+    def update(&block)
+      adapter.put(query_interface.first_url, query_interface.params, &block)
+    end
+
     def on_failure(&block)
       adapter.on_failure(&block)
       self
