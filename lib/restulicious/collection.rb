@@ -4,6 +4,7 @@ module Restulicious
     include Attributes
 
     attr_accessor :collection_key
+
     def self.from_parser(klazz, collection_key, data)
       setup_collection_of_items(klazz, collection_key, data)
       self.attributes *data.keys
@@ -13,18 +14,22 @@ module Restulicious
     end
 
     def each(&block)
-      send(collection_key).each(&block)
+      collection_accessor.each(&block)
     end
 
-    def empty?
-      send(collection_key).empty?
-    end
-
-    def size
-      send(collection_key).size
+    def method_missing(sym, *args, &block)
+      if collection_accessor.respond_to?(sym)
+        collection_accessor.call(sym, *args, &block)
+      else
+        super(sym, *args, &block)
+      end
     end
 
     private
+
+    def collection_accessor
+      send(collection_key)
+    end
 
     def self.setup_collection_of_items(klazz, collection_key, attributes)
       collection = []
