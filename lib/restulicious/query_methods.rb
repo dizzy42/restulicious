@@ -44,6 +44,10 @@ module Restulicious
         coordinator.create(&block)
       end
 
+      def update(&bock)
+        coordinator.update(&block)
+      end
+
       private
 
       def api_options(options)

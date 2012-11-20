@@ -17,6 +17,11 @@ module Restulicious
         handle_response(&block)
       end
 
+      def put(url, params, &block)
+        @request = ::RESTApi.put(url, params)
+        handle_response(&block)
+      end
+
       def on_success(&block)
         @on_success = block
       end
@@ -61,8 +66,8 @@ module Restulicious
           end
         end
         if @on_failure
-          @request.on_failure do |response|
-            @on_failure.call(parser(response).result)
+          @request.on_failure do |response, exception|
+            @on_failure.call(response, exception)
           end
         end
         if block_given?
