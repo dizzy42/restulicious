@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency('activesupport', '>= 3.0.0')
   gem.add_dependency('i18n')
-  gem.add_dependency('typhoeus', '0.2.5')
+  gem.add_dependency('typhoeus', '0.4.2')
 
   gem.add_development_dependency('minitest', '>= 3.0.0')
   gem.add_development_dependency('mocha')
