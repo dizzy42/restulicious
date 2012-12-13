@@ -40,12 +40,16 @@ module Restulicious
         coordinator.all(&block)
       end
 
-      def create(&block)
-        coordinator.create(&block)
-      end
+      # def create(&block)
+      #   coordinator.create(&block)
+      # end
 
-      def update(&bock)
-        coordinator.update(&block)
+      # def update(&bock)
+      #   coordinator.update(&block)
+      # end
+
+      def coordinator
+        Restulicious::Coordinator.new(self, @api_options)
       end
 
       private
@@ -54,10 +58,19 @@ module Restulicious
         @api_options = options
       end
 
-      def coordinator
-        Restulicious::Coordinator.new(self, @api_options)
-      end
-
     end
+
+    def coordinator
+      @coordinator ||= self.class.coordinator
+    end
+
+    def create(&block)
+      coordinator.create(&block)
+    end
+
+    def update(&bock)
+      coordinator.update(&block)
+    end
+
   end
 end
