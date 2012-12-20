@@ -57,11 +57,11 @@ module Restulicious
     end
 
     def all(&block)
-      adapter.get(query_interface.first_url, query_interface.params, &block)
+      adapter.get(query_interface.all_url, query_interface.params, &block)
     end
 
     def create(&block)
-      adapter.post(query_interface.first_url, query_interface.params, &block)
+      adapter.post(query_interface.all_url, query_interface.params, &block)
     end
 
     def update(&block)
