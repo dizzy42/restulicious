@@ -17,7 +17,7 @@ module Restulicious
 
     def initialize(attributes = {})
       attributes.each do |key, value|
-        send("#{key}=", check_utf8(value))
+        send("#{key}=", check_utf8(value)) if respond_to?("#{key}=")
       end
       super()
     end

@@ -23,6 +23,11 @@ describe Restulicious::Attributes do
     assert_equal 1234, object.id
   end
 
+  it "no exception if attribute passed in that isn't known" do
+    object = DummyClass.new(unknown_attribute: 1234)
+    assert_nil object.instance_variable_get(:@unknown_attribute)
+  end
+
   it "checks utf8 encoding"
 
 end
