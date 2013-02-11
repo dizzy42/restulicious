@@ -16,8 +16,8 @@ module Restulicious
     end
 
     def initialize(attributes = {})
-      self.class.attribute_names.each do |attr_name|
-        instance_variable_set("@#{attr_name}", check_utf8(attributes[attr_name]))
+      attributes.each do |key, value|
+        send("#{key}=", check_utf8(value))
       end
       super()
     end
