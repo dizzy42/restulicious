@@ -46,7 +46,7 @@ module Restulicious
     def interpolated_url
       interpolated_url = @url
       @params.each do |key, value|
-        interpolated_url = interpolated_url.gsub /:#{key}/, value.to_s
+        interpolated_url = interpolated_url.gsub /:#{key}/, Typhoeus::Utils.escape(value.to_s)
       end
       interpolated_url
     end
