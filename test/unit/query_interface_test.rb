@@ -55,6 +55,11 @@ describe Restulicious::QueryInterface do
       it "uses full url" do
         assert_equal "http://bigdeal.com/the/next/:thing", @interface.all_url
       end
+
+      it "URL encodes param values during interpolation" do
+        @interface.where(thing: "super#")
+        assert_equal "http://bigdeal.com/the/next/super%23", @interface.all_url
+      end
     end
 
     describe "first_url" do
