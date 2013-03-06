@@ -72,7 +72,9 @@ module Restulicious
         end
         if block_given?
           @request.on_complete do |response|
-            block.call(parser(response).result)
+            if response.success?
+              block.call(parser(response).result)
+            end
           end
         end
         if should_run_request?(&block)
