@@ -1,3 +1,4 @@
+#TODO: Split out this adapter into a separate gem
 module Restulicious
   module Adapter
     class RESTApi
@@ -40,6 +41,7 @@ module Restulicious
         Restulicious.config.parser_class.new(@klazz, @key, response.body)
       end
 
+      #TODO: Check whether this can be deleted
       def hydra
         Restulicious.config.hydra
       end
@@ -50,7 +52,7 @@ module Restulicious
 
       def run_request
         @request.queue if @request.respond_to?(:queue)
-        hydra.run
+        ::RESTApi.run
         parser(@request.response).result
       end
 
@@ -72,7 +74,9 @@ module Restulicious
         end
         if block_given?
           @request.on_complete do |response|
-            block.call(parser(response).result)
+            if response.success?
+              block.call(parser(response).result)
+            end
           end
         end
         if should_run_request?(&block)
