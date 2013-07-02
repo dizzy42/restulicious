@@ -7,6 +7,7 @@ module Restulicious
         @key             = key
         @request_options = request_options
         @headers         = headers
+        @timeout         = 10000
       end
 
       def get(url, params, &block)
@@ -33,12 +34,16 @@ module Restulicious
         @on_failure = block
       end
 
+      def timeout=(timeout)
+        @timeout = timeout
+      end
+
       private
 
       def request_options
           {
             headers:       { Accept: "application/json" }.merge(@headers),
-            timeout:       100000, # milliseconds
+            timeout:       @timeout, # milliseconds
             cache_timeout: 60 # seconds
           }.merge(@request_options)
       end
