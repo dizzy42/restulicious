@@ -33,6 +33,18 @@ describe Restulicious::Coordinator do
       @coordinator.select("id,name")
     end
 
+    it "has a timeout setter method which sends to the adapter" do
+      adapter = @coordinator.send(:adapter)
+      adapter.expects(:timeout=).with(100)
+      @coordinator.timeout = 100
+    end
+
+    it "has a timeout method which sends to the adapter" do
+      adapter = @coordinator.send(:adapter)
+      adapter.expects(:timeout=).with(100)
+      @coordinator.timeout(100)
+    end
+
     it "uses the same query interface each time" do
       assert_equal @coordinator.query_interface, @coordinator.query_interface
     end
