@@ -78,6 +78,15 @@ module Restulicious
       self
     end
 
+    def timeout=(timeout)
+      adapter.timeout = timeout
+    end
+
+    def timeout(timeout)
+      self.timeout = timeout
+      self
+    end
+
     def on_complete(&block)
       adapter.on_complete(&block)
       self

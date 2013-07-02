@@ -35,6 +35,10 @@ module Restulicious
         @on_failure = block
       end
 
+      def timeout=(timeout)
+        @request.timeout = timeout
+      end
+
       private
 
       def parser(response)
