@@ -10,16 +10,19 @@ module Restulicious
 
       def get(url, params, &block)
         @request = ::RESTApi.get(url, params)
+        set_timeout
         handle_response(&block)
       end
 
       def post(url, params, &block)
         @request = ::RESTApi.post(url, params)
+        set_timeout
         handle_response(&block)
       end
 
       def put(url, params, &block)
         @request = ::RESTApi.put(url, params)
+        set_timeout
         handle_response(&block)
       end
 
@@ -36,10 +39,14 @@ module Restulicious
       end
 
       def timeout=(timeout)
-        @request.timeout = timeout
+        @timeout = timeout
       end
 
       private
+
+      def set_timeout
+        @request.timeout = @timeout if @timeout.present?
+      end
 
       def parser(response)
         Restulicious.config.parser_class.new(@klazz, @key, response.body)
