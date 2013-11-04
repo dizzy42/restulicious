@@ -19,7 +19,7 @@ module Restulicious
       attributes.each do |key, value|
         send("#{key}=", check_utf8(value)) if respond_to?("#{key}=")
       end
-      super()
+      super
     end
 
     private
